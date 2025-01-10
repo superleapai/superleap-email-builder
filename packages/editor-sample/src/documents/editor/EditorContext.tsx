@@ -2,19 +2,7 @@ import { create } from 'zustand';
 
 import getConfiguration from '../../getConfiguration';
 
-import { TEditorConfiguration } from './core';
-
-type TValue = {
-  document: TEditorConfiguration;
-
-  selectedBlockId: string | null;
-  selectedSidebarTab: 'block-configuration' | 'styles';
-  selectedMainTab: 'editor' | 'preview' | 'json' | 'html';
-  selectedScreenSize: 'desktop' | 'mobile';
-
-  inspectorDrawerOpen: boolean;
-  samplesDrawerOpen: boolean;
-};
+import { TValue } from './types';
 
 const editorStateStore = create<TValue>(() => ({
   document: getConfiguration(window.location.hash),

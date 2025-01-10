@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Stack, useTheme } from '@mui/material';
+import { CssBaseline, Stack, ThemeProvider, useTheme } from '@mui/material';
 
 import { useInspectorDrawerOpen, useSamplesDrawerOpen } from '../documents/editor/EditorContext';
+import theme from '../theme';
 
+import { ExternalComponentsProvider } from './ExternalComponentsContext';
 import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from './InspectorDrawer';
-import SamplesDrawer, { SAMPLES_DRAWER_WIDTH } from './SamplesDrawer';
+import { SAMPLES_DRAWER_WIDTH } from './SamplesDrawer';
 import TemplatePanel from './TemplatePanel';
 
 function useDrawerTransition(cssProperty: 'margin-left' | 'margin-right', open: boolean) {
@@ -16,7 +18,13 @@ function useDrawerTransition(cssProperty: 'margin-left' | 'margin-right', open: 
   });
 }
 
-export default function App() {
+interface AppProps {
+  components?: {
+    VariableInput: React.ComponentType;
+  };
+}
+
+export default function App({ components }: AppProps) {
   const inspectorDrawerOpen = useInspectorDrawerOpen();
   const samplesDrawerOpen = useSamplesDrawerOpen();
 
@@ -24,19 +32,24 @@ export default function App() {
   const marginRightTransition = useDrawerTransition('margin-right', inspectorDrawerOpen);
 
   return (
-    <>
-      <InspectorDrawer />
-      <SamplesDrawer />
-
-      <Stack
-        sx={{
-          marginRight: inspectorDrawerOpen ? `${INSPECTOR_DRAWER_WIDTH}px` : 0,
-          marginLeft: samplesDrawerOpen ? `${SAMPLES_DRAWER_WIDTH}px` : 0,
-          transition: [marginLeftTransition, marginRightTransition].join(', '),
-        }}
-      >
-        <TemplatePanel />
-      </Stack>
-    </>
+    // <React.StrictMode>
+    <ExternalComponentsProvider components={components}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <InspectorDrawer />
+        {/* <SamplesDrawer /> */}
+        <Stack
+          sx={{
+            marginRight: inspectorDrawerOpen ? `${INSPECTOR_DRAWER_WIDTH}px` : 0,
+            marginLeft: samplesDrawerOpen ? `${SAMPLES_DRAWER_WIDTH}px` : 0,
+            transition: [marginLeftTransition, marginRightTransition].join(', '),
+          }}
+        >
+          <TemplatePanel />
+        </Stack>
+      </ThemeProvider>
+      //{' '}
+    </ExternalComponentsProvider>
+    // </React.StrictMode>
   );
 }
