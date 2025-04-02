@@ -8,6 +8,7 @@
     "dist"
   ],
   "scripts": {
+    "dev": "vite",
     "build": "npx tsc",
     "test": "npx jest"
   },
@@ -29,6 +30,7 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
+    "vite": "^6.2.4",
     "zod": "^3.22.4"
   }
 }
