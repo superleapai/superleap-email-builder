@@ -11,7 +11,7 @@
     "build": "npx tsc",
     "test": "npx jest"
   },
-  "author": "carlos@usewaypoint.com",
+  "author": "akashdeep@superleap.com and carlos@usewaypoint.com",
   "license": "MIT",
   "devDependencies": {
     "@jest/globals": "^29.7.0",

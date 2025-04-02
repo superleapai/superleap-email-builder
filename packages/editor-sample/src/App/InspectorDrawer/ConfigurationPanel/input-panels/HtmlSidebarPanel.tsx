@@ -16,8 +16,6 @@ type HtmlSidebarPanelProps = {
 export default function HtmlSidebarPanel({ data, setData }: HtmlSidebarPanelProps) {
   const { VariableInput } = useExternalComponents();
 
-  console.log(VariableInput);
-
   const [, setErrors] = useState<Zod.ZodError | null>(null);
   const [, setEditor] = useState(null);
 
