@@ -8,6 +8,8 @@ import ColorInput from './helpers/inputs/ColorInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
+import { useExternalComponents } from '../../../ExternalComponentsContext';
+import { AllowedDataType, GetValueType } from '../../../../documents/editor/types';
 
 type ButtonSidebarPanelProps = {
   data: ButtonProps;
@@ -15,6 +17,20 @@ type ButtonSidebarPanelProps = {
 };
 export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanelProps) {
   const [, setErrors] = useState<Zod.ZodError | null>(null);
+
+  const [, setEditor] = useState(null);
+
+  const { VariableInput } = useExternalComponents();
+
+  const handleTextChange = (text: string) => {
+    updateData({ ...data, props: { ...data.props, text } });
+  };
+
+  const handleTextVariableSelect = (variable: string) => {
+    const currentText = data.props?.text ?? ButtonPropsDefaults.text;
+    const newText = currentText + variable;
+    handleTextChange(newText);
+  };
 
   const updateData = (d: unknown) => {
     const res = ButtonPropsSchema.safeParse(d);
@@ -36,11 +52,27 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
 
   return (
     <BaseSidebarPanel title="Button block">
+      {VariableInput ? (
+        <VariableInput
+          defaultValue={text}
+          placeholder="Enter button text"
+          handleChange={handleTextChange}
+          onSelect={handleTextVariableSelect}
+          setEditor={setEditor}
+          multiVariable={true}
+          variant="default"
+          tiptapValueType={GetValueType.ALL}
+          allowedTypes={{
+            type: AllowedDataType.DataTypeText,
+          }}
+        />
+      ) : null}
       <TextInput
         label="Text"
         defaultValue={text}
         onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
       />
+
       <TextInput
         label="Url"
         defaultValue={url}

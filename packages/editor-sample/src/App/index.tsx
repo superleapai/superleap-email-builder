@@ -33,7 +33,7 @@ export default function App({ components }: AppProps) {
 
   return (
     // <React.StrictMode>
-    <ExternalComponentsProvider components={components}>
+    <ExternalComponentsProvider components={components as any}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <InspectorDrawer />

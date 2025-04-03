@@ -16,14 +16,19 @@ const VariableInput: React.FC<VariableInputProps> = ({
   setEditor,
   className = '',
 }) => {
-  const [value, setValue] = useState<string>(defaultValue || '');
+  const [value, setValue] = useState(defaultValue || '');
+
+  // Update local state when props change
+  useEffect(() => {
+    setValue(defaultValue || '');
+  }, [defaultValue]);
 
   useEffect(() => {
     // Simulating editor setup
     setEditor({ type: 'dummy-editor', active: true });
   }, [setEditor]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     const newValue = e.target.value;
     setValue(newValue);
     handleChange(newValue);
@@ -31,7 +36,13 @@ const VariableInput: React.FC<VariableInputProps> = ({
 
   const handleVariableSelect = () => {
     // Simulate variable selection with a dummy variable
-    const dummyVariable = '{{dummy_variable}}';
+    const dummyVariable = '{dummy_variable}';
+
+    // Update the local state with the new value
+    const newValue = value + dummyVariable;
+    setValue(newValue);
+
+    // Call the onSelect to update the parent component
     onSelect(dummyVariable);
   };
 
@@ -74,8 +85,6 @@ const VariableInput: React.FC<VariableInputProps> = ({
     </div>
   );
 };
-
-export default VariableInput;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
