@@ -48,7 +48,6 @@ export default function SuperLeapEmailBuilder({ components }: AppProps) {
             <TemplatePanel />
           </Stack>
         </ThemeProvider>
-        //{' '}
       </ExternalComponentsProvider>
     </React.StrictMode>
   );
