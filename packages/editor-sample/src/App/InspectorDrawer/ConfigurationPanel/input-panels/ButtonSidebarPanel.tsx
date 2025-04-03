@@ -66,13 +66,13 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
             type: AllowedDataType.DataTypeText,
           }}
         />
-      ) : null}
-      <TextInput
-        label="Text"
-        defaultValue={text}
-        onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
-      />
-
+      ) : (
+        <TextInput
+          label="Text"
+          defaultValue={text}
+          onChange={(text) => updateData({ ...data, props: { ...data.props, text } })}
+        />
+      )}
       <TextInput
         label="Url"
         defaultValue={url}
