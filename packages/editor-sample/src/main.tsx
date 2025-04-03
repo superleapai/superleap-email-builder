@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
-import App from './App';
 import theme from './theme';
+import SuperLeapEmailBuilder from './App';
 
 const VariableInput: React.FC<VariableInputProps> = ({
   defaultValue,
@@ -28,7 +28,7 @@ const VariableInput: React.FC<VariableInputProps> = ({
     setEditor({ type: 'dummy-editor', active: true });
   }, [setEditor]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const newValue = e.target.value;
     setValue(newValue);
     handleChange(newValue);
@@ -90,7 +90,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App components={{ VariableInput: VariableInput }} />
+      <SuperLeapEmailBuilder components={{ VariableInput: VariableInput }} />
     </ThemeProvider>
   </React.StrictMode>
 );

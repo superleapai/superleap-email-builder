@@ -24,7 +24,7 @@ interface AppProps {
   };
 }
 
-export default function App({ components }: AppProps) {
+export default function SuperLeapEmailBuilder({ components }: AppProps) {
   const inspectorDrawerOpen = useInspectorDrawerOpen();
   const samplesDrawerOpen = useSamplesDrawerOpen();
 
