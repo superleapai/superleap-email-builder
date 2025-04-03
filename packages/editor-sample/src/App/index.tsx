@@ -32,24 +32,24 @@ export default function SuperLeapEmailBuilder({ components }: AppProps) {
   const marginRightTransition = useDrawerTransition('margin-right', inspectorDrawerOpen);
 
   return (
-    // <React.StrictMode>
-    <ExternalComponentsProvider components={components as any}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <InspectorDrawer />
-        {/* <SamplesDrawer /> */}
-        <Stack
-          sx={{
-            marginRight: inspectorDrawerOpen ? `${INSPECTOR_DRAWER_WIDTH}px` : 0,
-            marginLeft: samplesDrawerOpen ? `${SAMPLES_DRAWER_WIDTH}px` : 0,
-            transition: [marginLeftTransition, marginRightTransition].join(', '),
-          }}
-        >
-          <TemplatePanel />
-        </Stack>
-      </ThemeProvider>
-      //{' '}
-    </ExternalComponentsProvider>
-    // </React.StrictMode>
+    <React.StrictMode>
+      <ExternalComponentsProvider components={components as any}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <InspectorDrawer />
+          {/* <SamplesDrawer /> */}
+          <Stack
+            sx={{
+              marginRight: inspectorDrawerOpen ? `${INSPECTOR_DRAWER_WIDTH}px` : 0,
+              marginLeft: samplesDrawerOpen ? `${SAMPLES_DRAWER_WIDTH}px` : 0,
+              transition: [marginLeftTransition, marginRightTransition].join(', '),
+            }}
+          >
+            <TemplatePanel />
+          </Stack>
+        </ThemeProvider>
+        //{' '}
+      </ExternalComponentsProvider>
+    </React.StrictMode>
   );
 }
