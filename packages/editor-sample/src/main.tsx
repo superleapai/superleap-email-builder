@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { CssBaseline, ThemeProvider } from '@mui/material';
-
-import theme from './theme';
 import SuperLeapEmailBuilder from './App';
 
-const VariableInput: React.FC<VariableInputProps> = ({
+const VariableInput: React.FC<any> = ({
   defaultValue,
   placeholder,
   onSelect,
@@ -87,10 +84,5 @@ const VariableInput: React.FC<VariableInputProps> = ({
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SuperLeapEmailBuilder components={{ VariableInput: VariableInput }} />
-    </ThemeProvider>
-  </React.StrictMode>
+  <SuperLeapEmailBuilder components={{ VariableInput: VariableInput }} />
 );
